@@ -53,10 +53,11 @@ from gevent.pool import Pool
 import urllib.parse
 from contextlib import contextmanager
 from ftplib import FTP as _FTP, error_temp, error_perm
-from itertools import cycle
+from itertools import cycle, count
 import uuid
 import os
 from socket import error as sock_error
+import sys
 
 try:
     import dns.resolver as resolver
@@ -230,7 +231,7 @@ def run_bench_login(opts):
     try:
         with Timeout(opts["maxrun"] * 60 or None):
             if opts["maxiter"] == -1:
-                iterator = itertools.count()
+                iterator = count()
             else:
                 iterator = range(opts["maxiter"])
             for _ in iterator:
@@ -298,7 +299,7 @@ def run_bench_upload(opts):
     try:
         with Timeout(opts["maxrun"] * 60 or None):
             if opts["maxiter"] == -1:
-                iterator = itertools.count()
+                iterator = count()
             else:
                 iterator = range(opts["maxiter"])
             for _ in iterator:
@@ -376,7 +377,7 @@ def run_bench_download(opts):
     try:
         with Timeout(opts["maxrun"] * 60 or None):
             if opts["maxiter"] == -1:
-                iterator = itertools.count()
+                iterator = count()
             else:
                 iterator = range(opts["maxiter"])
             for _ in iterator:
@@ -418,6 +419,7 @@ def main():
         opts["countfiles"] = int(arguments["--files"])
     except docopt.DocoptExit as e:
         print(str(e))
+        sys.exit(1)
     else:
         if arguments["login"]:
             run_bench_login(opts)
