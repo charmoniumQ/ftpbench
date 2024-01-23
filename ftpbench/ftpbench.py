@@ -409,7 +409,7 @@ def main():
         opts["password"] = arguments["--password"]
         opts["concurrent"] = int(arguments["--concurrent"])
         opts["timeout"] = int(arguments["--timeout"])
-        opts["maxrun"] = int(arguments["--maxrun"])
+        opts["maxrun"] = float(arguments["--maxrun"])
         opts["maxiter"] = int(arguments["--maxiter"])
         opts["size"] = int(arguments["--size"])
         opts["workdir"] = arguments["<workdir>"]
