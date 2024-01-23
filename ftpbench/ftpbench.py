@@ -57,6 +57,7 @@ from itertools import cycle, count
 import uuid
 import os
 from socket import error as sock_error
+import re
 import sys
 
 try:
@@ -397,7 +398,7 @@ def main():
         opts = dict()
 
         opts["host"] = arguments["--host"]
-        if resolver and "," not in opts["host"]:
+        if resolver and "," not in opts["host"] and not re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", opts["host"]):
             try:
                 hosts = []
                 for x in resolver.resolve(opts["host"], "A"):
