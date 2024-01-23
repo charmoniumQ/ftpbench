@@ -417,7 +417,7 @@ def main():
         opts["fixevery"] = int(arguments["--fixevery"])
         opts["countfiles"] = int(arguments["--files"])
     except docopt.DocoptExit as e:
-        print(e.message)
+        print(str(e))
     else:
         if arguments["login"]:
             run_bench_login(opts)
